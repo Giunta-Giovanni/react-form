@@ -6,7 +6,6 @@ export default function Header() {
                     La Mia Lista Di Articoli
                 </h1>
             </div>
-
         </header>
     )
 
