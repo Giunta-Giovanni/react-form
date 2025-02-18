@@ -89,22 +89,23 @@ export default function Main() {
 
                 </form>
 
-                { }
+                {articols.length === 0 ? <p className="avviso">La tua lista di articoli è vuota</p> :
+                    <ul>
+                        {articols.map((articolo) => (
+                            <li className="articolo" key={articolo.id}>
+                                <span>{articolo.titolo}</span>
+                                <button
+                                    className="btn-close"
+                                    aria-label="Close"
+                                    onClick={() => removeArticol(articolo.id)}>
+                                </button>
 
-                <ul>
-                    {articols.map((articolo) => (
-                        <li className="articolo" key={articolo.id}>
-                            <span>{articolo.titolo}</span>
-                            <button
-                                className="btn-close"
-                                aria-label="Close"
-                                onClick={() => removeArticol(articolo.id)}>
+                            </li>
+                        ))}
+                    </ul>
+                }
 
-                            </button>
 
-                        </li>
-                    ))}
-                </ul>
 
 
             </div>
