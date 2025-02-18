@@ -5,7 +5,13 @@ export default function Main() {
     //Aggiungiamo in pagina un semplice form con un campo input in cui inserire il titolo di un nuovo articolo del blog. Al submit del form, mostrare la lista degli articoli aggiornati.
 
     // array di articoli
-    const articoli = ["Tazza in ceramica", "Taccuino con copertina rigida", "Set di pennelli per acrilici", "Gioco da tavolo cooperativo fantasy", "Punta a tazza da 20 mm"]
+    const articoli = [
+        { id: 1, titolo: "Tazza in ceramica" },
+        { id: 2, titolo: "Taccuino con copertina rigida" },
+        { id: 3, titolo: "Set di pennelli per acrilici" },
+        { id: 4, titolo: "Gioco da tavolo cooperativo fantasy" },
+        { id: 5, titolo: "Punta a tazza da 20 mm" }
+    ];
 
     // Stato per memorizzare il valore dell'articolo
     const [articols, setArticols] = useState(articoli);
@@ -23,26 +29,45 @@ export default function Main() {
     // Gestione dell'invio del form, con rimozione dell'aggiornamento pagina e aggiunta nuovo elemento alla lista
     const addArticol = event => {
         event.preventDefault();
-        // this
-        // const updatedArticol = { ...articol, newArticol };
-        // setArticol(updatedArticol);
 
-        // Aggiungi il nuovo articolo all'array esistente
-        setArticols([...articols, newArticol]);
+        // 1. Aggiungi il nuovo articolo all'array esistente
+        // setArticols({ ...articols, newArticol });
+
+        // 2. Aggiungi il nuovo articolo all'array di oggetti
+        // new id inizialmente vuota
+        let newId = null;
+
+        // condizione per non avere errore se l'array è vuoto
+        { articols.length === 0 ? newId = 1 : newId = articols[articols.length - 1].id + 1; }
+        // crea il nuovo oggetto
+        const newItems = {
+            id: newId,
+            titolo: newArticol
+        }
+        // aggiorna l'array
+        setArticols([...articols, newItems])
+
         // Resetta l'input dopo l'aggiunta
         setNewArticol('');
     }
 
     // Gestione della rimozione di un elemento della lista
     const removeArticol = i => {
-        const updateArticol = articols.filter((articol, index) => {
-            return index !== i
+
+        // filtra sull'array
+        const updateArticol = articols.filter(articol => {
+            // ritornami tutti gli oggetti con id diverso da quello selezionato
+            return articol.id !== i
         })
+        // aggiorna l'array 
         setArticols(updateArticol);
     }
 
+    // console.log(articols)
+
     return (
         <main>
+            {/* contenitore esterno */}
             <div className="container">
                 {/* inseriamo al form l'evento onSubmit */}
                 <form onSubmit={addArticol}>
@@ -64,15 +89,16 @@ export default function Main() {
 
                 </form>
 
+                { }
 
                 <ul>
-                    {articols.map((articolo, index) => (
-                        <li className="articolo" key={index}>
-                            <span>{articolo}</span>
+                    {articols.map((articolo) => (
+                        <li className="articolo" key={articolo.id}>
+                            <span>{articolo.titolo}</span>
                             <button
                                 className="btn-close"
                                 aria-label="Close"
-                                onClick={() => removeArticol(index)}>
+                                onClick={() => removeArticol(articolo.id)}>
 
                             </button>
 

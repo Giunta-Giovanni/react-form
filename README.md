@@ -18,7 +18,7 @@ Aggiungiamo in pagina un semplice form con un campo input in cui inserire il tit
 
 
 <!-- BONUS 1 -->
-Aggiungere la possibilità di cancellare ciascun articolo utilizzando un’icona;
+Aggiungere la possibilità di cancellare ciascun articolo utilizzando un’icona;√
 
 <!-- BONUS 2 -->
 passare da array di stringhe a array di oggetti post (ogni post ha id e title), cercando di gestirli per poi per id, invece di appoggiarsi all’index dell’elemento nell’array.
