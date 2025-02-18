@@ -27,12 +27,12 @@ export default function Main() {
         // const updatedArticol = { ...articol, newArticol };
         // setArticol(updatedArticol);
 
-        // or
-        setArticol({ ...articol, newArticol });
+        // Aggiungi il nuovo articolo all'array esistente
+        setArticol([...articol, newArticol]);
+        // Resetta l'input dopo l'aggiunta
         setNewArticol('')
 
     }
-
     return (
         <main>
             <div className="container">
@@ -59,12 +59,13 @@ export default function Main() {
 
 
                 <ul>
-                    {articoli.map((articolo, index) => (
+                    {articol.map((articolo, index) => (
                         <li key={index}>
                             articolo numero {index}: {articolo}
                         </li>
                     ))}
                 </ul>
+
 
             </div>
         </main>
