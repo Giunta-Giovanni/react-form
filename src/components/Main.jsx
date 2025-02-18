@@ -8,7 +8,7 @@ export default function Main() {
     const articoli = ["Tazza in ceramica", "Taccuino con copertina rigida", "Set di pennelli per acrilici", "Gioco da tavolo cooperativo fantasy", "Punta a tazza da 20 mm"]
 
     // Stato per memorizzare il valore dell'articolo
-    const [articol, setArticol] = useState(articoli);
+    const [articols, setArticols] = useState(articoli);
     // console.log(articol)
 
     // Stato per memorizzare il valore del nuovo articolo
@@ -22,17 +22,25 @@ export default function Main() {
 
     // Gestione dell'invio del form, con rimozione dell'aggiornamento pagina e aggiunta nuovo elemento alla lista
     const addArticol = event => {
-        event.preventDefault()
+        event.preventDefault();
         // this
         // const updatedArticol = { ...articol, newArticol };
         // setArticol(updatedArticol);
 
         // Aggiungi il nuovo articolo all'array esistente
-        setArticol([...articol, newArticol]);
+        setArticols([...articols, newArticol]);
         // Resetta l'input dopo l'aggiunta
-        setNewArticol('')
-
+        setNewArticol('');
     }
+
+    // Gestione della rimozione di un elemento della lista
+    const removeArticol = i => {
+        const updateArticol = articols.filter((articol, index) => {
+            return index !== i
+        })
+        setArticols(updateArticol);
+    }
+
     return (
         <main>
             <div className="container">
@@ -51,7 +59,6 @@ export default function Main() {
                         />
                         <button className="btn btn-outline-secondary" >
                             Add
-
                         </button>
                     </div>
 
@@ -59,9 +66,16 @@ export default function Main() {
 
 
                 <ul>
-                    {articol.map((articolo, index) => (
-                        <li key={index}>
-                            articolo numero {index}: {articolo}
+                    {articols.map((articolo, index) => (
+                        <li className="articolo" key={index}>
+                            <span>{articolo}</span>
+                            <button
+                                className="btn-close"
+                                aria-label="Close"
+                                onClick={() => removeArticol(index)}>
+
+                            </button>
+
                         </li>
                     ))}
                 </ul>
